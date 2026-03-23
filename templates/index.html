@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SawiKu - Deteksi Hama</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- Header -->
+    <header class="top-bar">
+        <div class="app-name">SawiKu</div>
+        <div class="app-title">Deteksi dan Segmentasi Hama pada Tanaman Sawi</div>
+        <form method="post" enctype="multipart/form-data" class="form-inline">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Deteksi</button>
+        </form>
+    </header>
+
+    {% if original and result %}
+    <!-- Image and Detection Section -->
+    <main class="main-section">
+        <div class="image-box">
+            <h3>Gambar Asli</h3>
+            <img src="{{ original }}" alt="Gambar Asli">
+        </div>
+        <div class="image-box">
+            <h3>Hasil Deteksi</h3>
+            <img src="{{ result }}" alt="Hasil Deteksi">
+        </div>
+    </main>
+
+    <!-- Deskripsi -->
+    <section class="description-box">
+
+        {% if detected_class == 'Hama' %}
+            <h1>Deskripsi Hama Terdeteksi:</h1>
+        <p>
+            <h4>1. Ngengat Berlian (Plutella xylostella L)</h4>
+            <strong>Ciri Morfologi:</strong>
+            <p></p>
+            <ul>
+                <li>Tidak memiliki garis membujur di tubuhnya.</li>
+                <li>Tubuh berwarna hijau muda dengan bintik-bintik gelap di kepala berwarna kuning.</li>
+                <li>Terdapat bulu tipis berwarna hitam di tubuhnya.</li>
+                <li>Instar keempat berukuran 10-12 mm.</li>
+            </ul>
+            <p>
+            <strong>Pengendalian:</strong>
+            <ul>
+                <li>Menggunakan perasan daun tembakau sebagai pestisida nabati.</li>
+                <li>Menerapkan tumpangsari untuk mengontrol hama.</li>
+            </ul>
+            </p>
+        </p>
+        <p>
+        <p>
+            <h4>2. Ulat Grayak (Spodoptera)</h4>
+            <strong>Ciri Morfologi:</strong>
+            <p></p>
+            <ul>
+                <li>Warna tubuh bervariasi.</li>
+                <li>Pola bulan sabit/kalung hitam di perut ke-4 dan ke-10.</li>
+                <li>Garis terang di bagian belakang.</li>
+                <li>Ulat muda: hijau muda dengan sisi coklat tua atau hitam.</li>
+                <li>Ulat instar akhir: hijau tua dengan garis punggung gelap.</li>
+                <li>Panjang ±5 cm pada usia 2 minggu.</li>
+            </ul>
+            <p>
+            <strong>Pengendalian:</strong>
+            <ul>
+                <li>Menggunakan Bacillus thuringiensis.</li>
+                <li>Menggunakan insektisida kimia.</li>
+            </ul>
+            </p>
+        <p>
+        <p>
+
+        {% elif detected_class == 'Sehat' %}
+        <h2>Deskripsi Tanaman Sehat:</h2>
+        <p></p>   
+            <h4>Sawi Hijau (Brassica juncea L)</h4>
+            <strong>Kandungan Gizi:</strong>
+            <p></p>
+            <ul>
+                <li>Vitamin A, C, B9 dan K </li>
+                <li>Kalsium, zat besi, dan serat</li>
+                <li>Kalium dan antioksidan</li>
+            </ul>
+            <p></p>
+            <strong>Ciri Morfologi Dasar:</strong>
+            <p></p>
+            <ul>
+                <li>Daun hijau, variasi bentuk dan tekstur.</li>
+                <li>Batang tidak berkayu, lunak, dan dapat dikonsumsi.</li>
+                <li>Tumbuh dalam bentuk roset daun.</li>
+            </ul>
+            <p></p>
+            <strong>Panduan Penanaman:</strong>
+            <p></p>
+            <ul>
+                <li>Cocok di iklim sedang hingga tropis.</li>
+                <li>Tumbuh baik di tanah gembur dan subur.</li>
+                <li>Bisa ditanam di lahan atau polybag.</li>
+                <li>Panen dalam 25–40 hari.</li>
+            </ul>
+
+        {% else %}
+            <p>Maaf, kami tidak dapat mengidentifikasi kelas objek dalam gambar ini.</p>
+        {% endif %}
+    </section>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
